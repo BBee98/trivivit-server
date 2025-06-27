@@ -1,0 +1,36 @@
+{
+  "name": "trivivit-server",
+  "version": "0.0.0",
+  "main": "src/main.ts",
+  "scripts": {
+    "test": "test",
+    "build": "npx tsc",
+    "watch": "npx tsc --watch",
+    "start": "npm run build && node dist/main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BBee98/trivivit-server.git"
+  },
+  "keywords": [
+    "trivial",
+    "vite",
+    "server",
+    "api"
+  ],
+  "author": "BBee98",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BBee98/trivivit-server/issues"
+  },
+  "homepage": "https://github.com/BBee98/trivivit-server#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.0.4",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.0",
+    "fastify": "^5.4.0"
+  }
+}
