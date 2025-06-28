@@ -8,7 +8,7 @@ npm install fastify
 
 Nota: Puedes ver la documentación aquí: 👉https://fastify.dev/ 👈
 
-Crea un fichero llamado ``main.ts`` dentro del directorio ``src`` y pega el siguiente código:
+Crea un fichero llamado ``server.ts`` dentro del directorio ``src`` y pega el siguiente código:
 
 ````typescript
 

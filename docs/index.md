@@ -39,13 +39,42 @@ Se usará una ``Featured-based architecture``:
 npm install typescript
 ```
 
-2. Necesitaremos usar algunos aspectos de ``node``. Recomendable instalar los tipos para no tener problemas:
+2. Para compilarlo, en lugar de la herramienta nativa de Typescript (``tsc``) vamos a usar ``tsup``:
+
+🌏 https://github.com/egoist/tsup
+
+En este otro link existe una información más **completa** con ``flags`` que puedes añadir para personalizar el transpilado:
+
+👉 https://tsup.egoist.dev/#install
+
+Para instalar ``tsup``, escribe en la terminal:
+
+```
+npm install --save-dev tsup
+```
+
+````
+🚨En la documentación, puede leerse:
+
+By default tsup bundles all import-ed modules but dependencies 
+and peerDependencies in your package.json are always excluded, 
+you can also use --external <module|pkgJson> flag to mark other packages or other special package.json's 
+dependencies and peerDependencies as external.
+
+Es decir, que **todas las dependencias del package.json que se encuentren dentro de esos dos sitios no se incluirán en el transpilado**.
+````
+
+🔗 Para ver el ``script`` que vamos a usar para el transpilado, _leer la sección de Scripts_.
+
+
+
+3. Necesitaremos usar algunos aspectos de ``node``. Recomendable instalar los tipos para no tener problemas:
 
 ```shell
 npm i --save-dev @types/node
 ```
 
-3. ``Dotenv`` para las variables de entorno:
+4. ``Dotenv`` para las variables de entorno:
 
 ```shell
 npm i dotenv
@@ -59,10 +88,10 @@ Añade al ``package.json``:
 {
   "name": "trivivit-server",
   "version": "0.0.0",
-  "main": "src/main.ts",
+  "main": "src/server.ts",
   "scripts": {
     "test": "test",
-    "build": "npx tsc",
+    "build": "tsup-node src/core/server.ts dist/server.js --minify",
     "watch": "npx tsc --watch",
     "start": "npm run build && node dist/main"
   },
@@ -71,25 +100,13 @@ Añade al ``package.json``:
 
 ```
 
+🚨 En el punto anterior dijimos que **todas las dependencies y peerDependencies del package.json serían excluidas por el propio tsup**, pero dado que **es posible que algunas
+de esas dependencias no sean excluidas**, vamos a utilizar la opción ``tsup-node`` para asegurarnos de que, efectivamente, **todas** sean excluidas (👉 leer más en https://tsup.egoist.dev/#excluding-all-packages).
+
+🚨 Además, vamos a añadir la opción ``--minify`` para reducir el tamaño (👉 leer más en https://tsup.egoist.dev/#minify-output)
+
 El más importante es ``"start": "npm run build && node dist/main"``, el cual nos permite compilar el
 código de ``typescript`` a ``javascript``para poder levantar el servidor de ``fastify``.
 
-🔔 Recuerda generar el fichero ``tsconfig.json`` para poder compilar. Puedes utilizar esta configuración:
-
-tsconfig.json
-
-```json
-{
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules"],
-  "compilerOptions": {
-    "target": "ESNext",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
-    "module": "commonjs",                                /* Specify what module code is generated. */
-    "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */
-    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
-    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
-    "strict": true,                                      /* Enable all strict type-checking options. */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
-}
-```
+🔔 Recuerda que, como vamos a usar ``tsup`` el fichero ``tsconfig.json`` **no es necesario**, así que no hace falta generarlo. En caso de querer tener más opciones para ``tsup``, puedes generar
+su propio fichero de configuración (👉 leer más en https://tsup.egoist.dev/#using-custom-configuration)

@@ -1,12 +1,12 @@
 {
   "name": "trivivit-server",
   "version": "0.0.0",
-  "main": "src/main.ts",
+  "main": "src/core/server.ts",
   "scripts": {
     "test": "test",
-    "build": "npx tsc",
+    "build": "tsup-node src/core/server.ts dist/server.js --minify",
     "watch": "npx tsc --watch",
-    "start": "npm run build && node dist/main"
+    "start": "npm run build && node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^24.0.4",
+    "tsup": "^8.5.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
