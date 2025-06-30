@@ -1,6 +1,6 @@
 // ROUTES
 
-import '../features/question/routes';
+import '../features/question/routes/question.routes';
 import {fastify} from "./app";
 
 // Run the server!

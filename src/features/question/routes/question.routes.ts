@@ -1,4 +1,5 @@
 import {fastify} from "../../../core/app";
+import {GetQuestions} from "../handlers/question.handlers";
 
 fastify.route({
     method: 'GET',
@@ -25,7 +26,5 @@ fastify.route({
     preHandler: async (request, reply) => {
         // E.g. check authentication
     },
-    handler: async (request, reply) => {
-        return { hello: 'world' }
-    }
+    handler: async (request, reply) => GetQuestions()
 })

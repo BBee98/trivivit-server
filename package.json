@@ -4,7 +4,8 @@
   "main": "src/core/server.ts",
   "scripts": {
     "test": "test",
-    "build": "tsup-node src/core/server.ts dist/server.js --minify",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsup-node src/core/server.ts dist/server.js --minify",
     "watch": "npx tsc --watch",
     "start": "npm run build && node dist/server.js"
   },

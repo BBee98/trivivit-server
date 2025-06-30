@@ -80,6 +80,8 @@ npm i --save-dev @types/node
 npm i dotenv
 ```
 
+🌏 https://www.npmjs.com/package/dotenv
+
 #### Script
 
 Añade al ``package.json``:
@@ -91,9 +93,10 @@ Añade al ``package.json``:
   "main": "src/server.ts",
   "scripts": {
     "test": "test",
-    "build": "tsup-node src/core/server.ts dist/server.js --minify",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsup-node src/core/server.ts dist/server.js --minify",
     "watch": "npx tsc --watch",
-    "start": "npm run build && node dist/main"
+    "start": "npm run build && node dist/server.js"
   },
   ...
 }
