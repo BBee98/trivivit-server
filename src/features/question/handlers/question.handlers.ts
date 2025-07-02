@@ -1,4 +1,6 @@
-export async function GetQuestions() {
+import {FastifyReply} from "fastify";
+
+export async function GetQuestionsHandler(reply: FastifyReply) {
 
     const baseUrl = process.env.TRIVIA_API_URL;
 
@@ -7,11 +9,9 @@ export async function GetQuestions() {
     try {
         const response = await fetch(url)
         const body = await response.json();
-
-        console.log("body", body);
+        reply.send(body);
 
     } catch (error){
         return error;
     }
-
 }
