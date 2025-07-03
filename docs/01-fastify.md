@@ -329,3 +329,46 @@ entorno en el que estemos
 
 ![Definición de variables en Postman](../docs/thumbnails/2.postman-variables.png)
 
+
+### Terminando de definir la ruta.
+
+Ya tenemos todos los ingredientes necesarios:
+
+1. El método HTTP y el path.
+2. El ``handler`` asociado a esa ruta.
+
+Ahora, tenemos que terminar de **registrar la ruta**.
+
+En el fichero ``question.routes.ts`` se quedó el código así:
+
+````
+import {fastify} from "../../../core/app";
+import {HttpGetBaseUrl} from "./routes";
+
+fastify.register((app, _, done) => {
+    app.register((app , _, done) => {
+    ...
+    }, { prefix: '/questions' })
+}, { prefix: '/v1' })
+````
+
+Nos falta decir **qué ruta queremos registrar**. Por ello, tenemos que añadir la
+función que creaba esa ruta para terminar de registrarla:
+
+```
+import {fastify} from "../../../core/app";
+import {HttpGetBaseUrl} from "./routes";
+
+fastify.register((app, _, done) => {
+    app.register((app , _, done) => {
+        HttpGetBaseUrl(app);
+        done();
+    }, { prefix: '/questions' })
+    done();
+}, { prefix: '/v1' })
+
+```
+
+🚨 Es **muy importante** añadir ``done()`` tras hacer el ``register`` para que fastify concluya el registro.
+
+🎉 Y con esto, tenemos registrada **nuestra primera ruta**. 🎉
