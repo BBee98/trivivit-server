@@ -9,6 +9,9 @@ export async function GetQuestionsHandler(reply: FastifyReply) {
     try {
         const response = await fetch(url)
         const body = await response.json();
+
+        console.log("body", body);
+
         reply.send(body);
 
     } catch (error){
