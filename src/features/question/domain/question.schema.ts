@@ -1,4 +1,7 @@
 import { z } from "zod/v4";
+import {QuestionModel} from "./question.model";
+
+
 
 export const Question = z.object({
     type:              z.string(),
@@ -14,4 +17,6 @@ export const QuestionSchema = {
     results: z.array(Question)
 }
 
+export const StoredQuestions: Array<QuestionModel> = [];
 
+export const StoredAnswers = []
