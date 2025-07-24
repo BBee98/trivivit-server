@@ -55,7 +55,7 @@ export async function GetQuestionHandler(request: FastifyRequest, reply: Fastify
 
     const data = ReadFile('db.txt');
 
-    const question = data.find(({id}) => {
+    const { question } = data.find(({id}) => {
         return Number(id) === Number(paramId);
     });
 
@@ -69,7 +69,7 @@ export async function GetQuestionHandler(request: FastifyRequest, reply: Fastify
     }
         reply.send({
             response_code: 200,
-            results: question
+            result: question
         });
 }
 
@@ -92,7 +92,7 @@ export async function PostQuestionsHandler(request: FastifyRequest, reply: Fasti
 
     reply.send({
         response_code: 200,
-        results: question,
+        result: question,
         message: `Successfully stored answer to question`
     });
 
